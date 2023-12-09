@@ -1,0 +1,80 @@
+﻿<Window
+    x:Class="MarkdownViewer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:command="clr-namespace:MarkdownViewer.Command"
+    xmlns:control="clr-namespace:Markdown;assembly=TextBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MarkdownViewer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:MarkdownViewer.ViewModel"
+    Title="MarkdownViewer"
+    Width="1280"
+    Height="720"
+    mc:Ignorable="d">
+    <!--  データコンテキスト  -->
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <!--  キーボードショートカット  -->
+    <Window.InputBindings />
+    <!--  画面レイアウト  -->
+    <Grid>
+        <!--#region グリッドレイアウト定義-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <MenuItem Header="ファイル(_F)">
+                <MenuItem Command="{Binding FileOpenCommand}" Header="開く(_O)" />
+                <Separator />
+                <MenuItem Header="上書き保存(_S)" />
+                <MenuItem Header="名前を付けて保存(_A)" />
+                <Separator />
+                <MenuItem Header="閉じる(_C)" />
+                <MenuItem Header="保存して閉じる(_E)" />
+            </MenuItem>
+            <MenuItem Header="設定(_O)" />
+            <MenuItem Header="ヘルプ(_H)" />
+            <MenuItem />
+        </Menu>
+        <TextBox
+            x:Name="SourceText"
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Text="#Title"
+            TextChanged="{Binding OnSourceTextChanged}" />
+
+        <!--<RichTextBox
+            x:Name="DocumentText"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Focusable="False" />-->
+        <Frame
+            x:Name="DocumentText"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="Auto"
+            Height="Auto"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Focusable="False" />
+    </Grid>
+</Window>
